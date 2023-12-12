@@ -4,16 +4,32 @@
   margin-bottom: 5px;
   padding: 5px;
   text-align: center;
+  cursor: pointer;
 }
+
+.ship.selected-ship {
+  background-color: var(--accent);
+  color: var(--color2);
+}
+
+.ship:hover {
+  background-color: var(--color3);
+}
+
 .ship-square {
   width: 20px;
   height: 20px;
   background-color: var(--accent);
   margin-right: 5px;
 }
+
+.selected-ship .ship-square {
+  background-color: var(--color2);
+}
+
 .ship-name {
-  display: block; /* Para que el span ocupe el ancho completo */
-  margin-bottom: 5px; /* Añadir un pequeño espacio entre el nombre y la representación */
+  display: block; 
+  margin-bottom: 5px;
 }
 .ship-length {
   display: flex;

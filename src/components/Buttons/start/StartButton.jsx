@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import './StartButton.css'
-import { GameContext } from '../../../context/gameContext'
+import { GameContext } from '../../../context/GameContext'
 
 const StartButton = () => {
   const { handleGameStart } = useContext(GameContext)

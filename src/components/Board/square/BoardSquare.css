@@ -4,3 +4,11 @@
   border: solid 1px black;
   box-sizing: border-box;
 }
+
+.square.active:hover {
+  background-color: var(--accent);
+}
+
+.square.ship {
+  background-color: var(--ship);
+}

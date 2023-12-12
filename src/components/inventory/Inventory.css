@@ -3,6 +3,8 @@
   padding: 10px;
   width: 180px;
   text-align: center;
+  display: flex; /* Añadido para usar flexbox */
+  flex-direction: column;
 }
 
 #inventory h2 {
@@ -14,9 +16,9 @@
   margin-bottom: 5px;
 }
 
-#inventory button {
+#inventory .axis {
   width: 70px;
-  background-color: var(--accent);
+  background-color: var(--color2);
   border-radius: 3px;
   border-style: none;
   cursor: pointer;
@@ -24,7 +26,12 @@
   font-weight: 500;
   padding: 8px;
   text-align: center;
-  color:white;
+  color:var(--accent);
   margin-right: 3px;
   margin-left: 3px;
+}
+
+#inventory .selected{
+  background-color: var(--accent);
+  color: white;
 }
