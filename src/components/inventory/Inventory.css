@@ -1,0 +1,30 @@
+#inventory {
+  background-color: var(--color1);
+  padding: 10px;
+  width: 180px;
+  text-align: center;
+}
+
+#inventory h2 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+#inventory .buttons {
+  margin-bottom: 5px;
+}
+
+#inventory button {
+  width: 70px;
+  background-color: var(--accent);
+  border-radius: 3px;
+  border-style: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px;
+  text-align: center;
+  color:white;
+  margin-right: 3px;
+  margin-left: 3px;
+}
