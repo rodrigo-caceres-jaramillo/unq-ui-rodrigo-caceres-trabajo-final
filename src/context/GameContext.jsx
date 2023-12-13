@@ -1,5 +1,5 @@
 import { createContext, useState } from "react"
-import { BOARD, SHIPS } from "./db"
+import { SHIPS } from "./db"
 
 export const GameContext = createContext({})
 
@@ -16,7 +16,6 @@ export const GameProvider = ({ children }) => {
   //Computer
   const [computerShips, setComputerShips] = useState([...SHIPS])
   const [computerBoard, setComputerBoard] = useState(generateInitialBoard);
-  const [computerShipSelected, setComputerShipSelected] = useState()
 
   const handleGameStart = () => {
     placeComputerBoar()
@@ -70,7 +69,28 @@ export const GameProvider = ({ children }) => {
     }
   }
 
-  const attackClick = ( rowIndex, columnIndex, hasShip) => {
+  const attackClick = ( rowIndex, columnIndex, hasShip, computer) => {
+    if (hasShip) {
+      handleAttack(rowIndex, columnIndex, true, computer)
+    } else {
+      handleAttack(rowIndex, columnIndex, false, computer)
+    }
+  }
+  
+
+  const handleAttack = (rowIndex, columnIndex, hit, computer) => {
+    var updatedBoard = []
+    if (computer) {
+      updatedBoard = [...computerBoard];
+    } else {
+      updatedBoard = [...playerBoard];
+    }
+    updatedBoard[rowIndex][columnIndex] = hit ? 2 : 3;
+    if (computer) {
+      setComputerBoard(updatedBoard)
+    } else {
+      setPlayerBoard(updatedBoard);
+    }
   }
 
   const hasEnoughSpace = (ship, rowIndex, columnIndex, direction, board) => {

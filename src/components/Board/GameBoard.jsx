@@ -13,6 +13,7 @@ const GameBoard = ({ title, board, computer}) => {
             columnIndex={columnIndex}
             hasShip={cell === 1}
             striked={cell === 2}
+            water= {cell ===3}
             computer={computer}
           />
         );
