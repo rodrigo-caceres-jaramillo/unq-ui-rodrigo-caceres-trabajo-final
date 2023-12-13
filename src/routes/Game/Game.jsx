@@ -14,8 +14,8 @@ const Game = () => {
       {startGame ? <RestartButton/> : null}
       {playerShips.length === 0 ? <StartButton /> : null}
       <div className="content">
-      <GameBoard title={"Tu Tablero"} board={playerBoard} />
-      {startGame ? <GameBoard title={"Computadora"} board={computerBoard} computer/> : <Inventory />}
+      <GameBoard title={"Tu Tablero"} board={playerBoard} own={true}/>
+      {startGame ? <GameBoard title={"Computadora"} board={computerBoard} own={false}/> : <Inventory />}
       </div>
     </div>
   )

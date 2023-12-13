@@ -43,7 +43,6 @@ export const GameProvider = ({ children }) => {
   const selectDirection = (direction) => {
     setPlayerDirection(direction)
     setShipSelected(null)
-    console.log(playerDirection)
   }
 
   const selectShip = (ship) => {
@@ -69,29 +68,19 @@ export const GameProvider = ({ children }) => {
     }
   }
 
-  const attackClick = ( rowIndex, columnIndex, hasShip, computer) => {
-    if (hasShip) {
-      handleAttack(rowIndex, columnIndex, true, computer)
+  const placeShip = (ship, rowIndex, columnIndex, direction, board) => {
+    const shipLength = ship.shipLength;
+    if (direction) {
+      for (let i = columnIndex; i < columnIndex + shipLength; i++) {
+        board[rowIndex][i] = 1;
+      }
     } else {
-      handleAttack(rowIndex, columnIndex, false, computer)
+      for (let i = rowIndex; i < rowIndex + shipLength; i++) {
+        board[i][columnIndex] = 1;
+      }
     }
-  }
-  
-
-  const handleAttack = (rowIndex, columnIndex, hit, computer) => {
-    var updatedBoard = []
-    if (computer) {
-      updatedBoard = [...computerBoard];
-    } else {
-      updatedBoard = [...playerBoard];
-    }
-    updatedBoard[rowIndex][columnIndex] = hit ? 2 : 3;
-    if (computer) {
-      setComputerBoard(updatedBoard)
-    } else {
-      setPlayerBoard(updatedBoard);
-    }
-  }
+    return [...board]
+  };
 
   const hasEnoughSpace = (ship, rowIndex, columnIndex, direction, board) => {
     const shipLength = ship.shipLength
@@ -117,19 +106,42 @@ export const GameProvider = ({ children }) => {
     return true;
   }
 
-  const placeShip = (ship, rowIndex, columnIndex, direction, board) => {
-    const shipLength = ship.shipLength;
-    if (direction) {
-      for (let i = columnIndex; i < columnIndex + shipLength; i++) {
-        board[rowIndex][i] = 1;
-      }
+  const attackClick = ( rowIndex, columnIndex, hasShip) => {
+    if (hasShip) {
+      handleAttack(rowIndex, columnIndex, true, true)
     } else {
-      for (let i = rowIndex; i < rowIndex + shipLength; i++) {
-        board[i][columnIndex] = 1;
-      }
+      handleAttack(rowIndex, columnIndex, false, true)
     }
-    return [...board]
-  };
+    attackPlayer()
+  }
+  
+  const handleAttack = (rowIndex, columnIndex, hit, computer) => {
+    var updatedBoard = []
+    if (computer) {
+      updatedBoard = [...computerBoard];
+    } else {
+      updatedBoard = [...playerBoard];
+    }
+    updatedBoard[rowIndex][columnIndex] = hit ? 2 : 3;
+    if (computer) {
+      setComputerBoard(updatedBoard)
+    } else {
+      setPlayerBoard(updatedBoard);
+    }
+  }
+
+  const attackPlayer = () => {
+    console.log("ataque")
+    let randomRow, randomColumn;
+    do {
+      randomRow = Math.floor(Math.random() * 10);
+      randomColumn = Math.floor(Math.random() * 10);
+    } while (playerBoard[randomRow][randomColumn] === 2 || playerBoard[randomRow][randomColumn] === 3);
+  
+    // Verifica si el ataque fue un acierto y llama a handleAttack
+    const hasShip = playerBoard[randomRow][randomColumn] === 1;
+    handleAttack(randomRow, randomColumn, hasShip, false);
+  }
 
   return (
     <GameContext.Provider value={{

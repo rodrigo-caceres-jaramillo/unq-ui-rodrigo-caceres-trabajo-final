@@ -1,7 +1,7 @@
 import BoardSquare from "./square/BoardSquare"
 import './GameBoard.css'
 
-const GameBoard = ({ title, board, computer}) => {
+const GameBoard = ({ title, board, own}) => {
 
   const renderBoard = () => {
     return board.map((row, rowIndex) => {
@@ -14,7 +14,7 @@ const GameBoard = ({ title, board, computer}) => {
             hasShip={cell === 1}
             striked={cell === 2}
             water= {cell ===3}
-            computer={computer}
+            own={own}
           />
         );
       });
