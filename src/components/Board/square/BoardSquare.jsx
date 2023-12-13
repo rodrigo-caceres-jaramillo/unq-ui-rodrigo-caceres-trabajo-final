@@ -9,13 +9,18 @@ const BoardSquare = ({rowIndex, columnIndex, hasShip, striked, water, own}) => {
     if(!startGame) {
       placeClick(rowIndex, columnIndex, hasShip)
     } else {
-      attackClick(rowIndex, columnIndex, hasShip)
+      if(own){
+        return
+      }else{
+        attackClick(rowIndex, columnIndex, hasShip)
+      }
     }
   }
 
   return <div 
             className={`square 
-              ${shipSelected ? 'selected' : ''} 
+              ${shipSelected ? 'selected' : ''}
+              ${!own ? 'attacking' : ''} 
               ${hasShip ? 'ship' : ''} 
               ${striked ? 'strike' : ''}
               ${water ? 'water' : ''}`}

@@ -1,0 +1,41 @@
+#index{
+  display:flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: var(--color1);
+  padding: 20px;
+  border-radius: 5px;
+  margin: auto;
+}
+
+#index h1{
+  font-size: 3em;
+}
+
+#index .to-game{
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: White;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#index .to-game:hover{
+  background-color: var(--color2);
+}
+#index .to-rules{
+  padding: 10px;
+  font-size: 1.5em;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#index .to-rules:hover{
+  background-color: var(--color2);
+}
+

@@ -2,17 +2,15 @@ import { useContext } from "react"
 import Inventory from "../../components/inventory/Inventory"
 import GameBoard from "../../components/Board/GameBoard"
 import './Game.css'
-import RestartButton from "../../components/Buttons/restart/RestartButton"
-import StartButton from "../../components/Buttons/start/StartButton"
 import { GameContext } from "../../context/GameContext"
+import GameHeader from "../../components/GameHeader/GameHeader"
 
 const Game = () => {
-  const { startGame, playerBoard, computerBoard, playerShips} = useContext(GameContext)
+  const { startGame, playerBoard, computerBoard } = useContext(GameContext)
 
   return (
     <div id="game">
-      {startGame ? <RestartButton/> : null}
-      {playerShips.length === 0 ? <StartButton /> : null}
+      <GameHeader />
       <div className="content">
       <GameBoard title={"Tu Tablero"} board={playerBoard} own={true}/>
       {startGame ? <GameBoard title={"Computadora"} board={computerBoard} own={false}/> : <Inventory />}

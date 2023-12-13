@@ -21,7 +21,16 @@ export const GameProvider = ({ children }) => {
     placeComputerBoar()
     setStartGame(true)
   }
-  
+
+  const handleRestartStart = () => {
+    setStartGame(false)
+    setPlayerBoard(generateInitialBoard)
+    setComputerBoard(generateInitialBoard)
+    setPlayerShips([...SHIPS])
+    setComputerShips([...SHIPS])
+    setShipSelected()
+  }
+
   const placeComputerBoar = () => {
     const copyComputerBoard = [...computerBoard];
     const shipsToPlace = [...computerShips];
@@ -131,14 +140,12 @@ export const GameProvider = ({ children }) => {
   }
 
   const attackPlayer = () => {
-    console.log("ataque")
     let randomRow, randomColumn;
     do {
       randomRow = Math.floor(Math.random() * 10);
       randomColumn = Math.floor(Math.random() * 10);
     } while (playerBoard[randomRow][randomColumn] === 2 || playerBoard[randomRow][randomColumn] === 3);
   
-    // Verifica si el ataque fue un acierto y llama a handleAttack
     const hasShip = playerBoard[randomRow][randomColumn] === 1;
     handleAttack(randomRow, randomColumn, hasShip, false);
   }
@@ -157,7 +164,8 @@ export const GameProvider = ({ children }) => {
       selectDirection,
       selectShip,
       placeClick,
-      attackClick
+      attackClick,
+      handleRestartStart
     }}
     >
       {children}

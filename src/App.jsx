@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
-import { Index } from './routes/Index';
+
 import { Rules } from './routes/Rules';
 import Game from "./routes/Game/Game";
+import Index from "./routes/Index/Index";
 
 function App() {
   const router = createBrowserRouter([

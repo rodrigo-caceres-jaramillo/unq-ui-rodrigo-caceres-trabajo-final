@@ -1,0 +1,16 @@
+.game-header{
+  background-color: var(--color1);
+  padding: 10px;
+  margin: 5px;
+  margin-top: 0;
+}
+
+.game-header h2{
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.game-header .buttons {
+  text-align: center;
+}

@@ -1,13 +1,18 @@
-.start {
+.header-button {
   background-color: var(--accent);
   border-radius: 3px;
   border-style: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   padding: 8px;
   text-align: center;
-  color:white;
+  color:var(--color1);
   margin-right: 3px;
   margin-left: 3px;
+}
+
+.header-button:hover {
+  background-color: var(--color3);
+  color: white;
 }

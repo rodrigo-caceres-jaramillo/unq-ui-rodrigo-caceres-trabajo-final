@@ -3,7 +3,8 @@
   padding: 10px;
   width: fit-content;
   text-align: center;
-  margin-right: 20px;
+  margin: 5px;
+  margin-bottom: 0;
 }
 
 .game-board h1{

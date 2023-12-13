@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0f134e;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,12 +14,18 @@
   --color1:  #040920;
   --color2:  #191e33;
   --color3:  #1a4d4e;
-  --ship: #b421a8;
-  --strike: #e24211;
+  --ship: #423114;
+  --strike: #f11d1d;
   --water: #1d1ac4;
   --accent: #88D1FB;
 }
 
 body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
+
 

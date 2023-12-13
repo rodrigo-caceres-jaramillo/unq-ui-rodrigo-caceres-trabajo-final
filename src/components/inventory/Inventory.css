@@ -2,8 +2,10 @@
   background-color: var(--color1);
   padding: 10px;
   width: 180px;
+  margin: 5px;
+  margin-bottom: 0;
   text-align: center;
-  display: flex; /* Añadido para usar flexbox */
+  display: flex;
   flex-direction: column;
 }
 
