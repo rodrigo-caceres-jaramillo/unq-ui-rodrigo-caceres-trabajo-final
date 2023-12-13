@@ -5,14 +5,41 @@ export const GameContext = createContext({})
 
 export const GameProvider = ({ children }) => {
   const [startGame, setStartGame] = useState(false)
-  const [playerShips, setPlayerShips] = useState(SHIPS)
+  const generateInitialBoard = () => {
+    return Array.from({ length: 10 }, () => Array(10).fill(0));
+  }
+  //Player
+  const [playerShips, setPlayerShips] = useState([...SHIPS])
   const [playerDirection, setPlayerDirection] = useState(true)
   const [shipSelected, setShipSelected] = useState()
-  const [playerBoard, setPlayerBoard] = useState(BOARD);
+  const [playerBoard, setPlayerBoard] = useState(generateInitialBoard);
+  //Computer
+  const [computerShips, setComputerShips] = useState([...SHIPS])
+  const [computerBoard, setComputerBoard] = useState(generateInitialBoard);
+  const [computerShipSelected, setComputerShipSelected] = useState()
 
   const handleGameStart = () => {
+    placeComputerBoar()
     setStartGame(true)
   }
+  
+  const placeComputerBoar = () => {
+    const copyComputerBoard = [...computerBoard];
+    const shipsToPlace = [...computerShips];
+
+    while (shipsToPlace.length > 0) {
+      const isHorizontal = Math.random() < 0.5;
+      const rowIndex = Math.floor(Math.random() * 10);
+      const columnIndex = Math.floor(Math.random() * 10);
+      const shipToPlace = shipsToPlace[0];
+      if (hasEnoughSpace(shipToPlace, rowIndex, columnIndex, isHorizontal, copyComputerBoard)) {
+        placeShip(shipToPlace, rowIndex, columnIndex, isHorizontal, copyComputerBoard);
+        shipsToPlace.shift();
+    }
+  }
+  setComputerBoard(copyComputerBoard);
+  setComputerShips()
+}
 
   const selectDirection = (direction) => {
     setPlayerDirection(direction)
@@ -24,29 +51,36 @@ export const GameProvider = ({ children }) => {
     setShipSelected(ship)
   }
 
-  const boardClick = ( rowIndex, columnIndex, hasShip) => {
+  const placeClick = (rowIndex, columnIndex, hasShip) => {
     if(startGame){
       return
     }
     else if (shipSelected) {
       if (hasShip) {
         console.log("Ya hay un barco en esta posicion");
-      } else if (hasEnoughtSpace(rowIndex, columnIndex)) {
-          placeShip(rowIndex, columnIndex)
+      } else if (hasEnoughSpace(shipSelected, rowIndex, columnIndex, playerDirection, playerBoard)) {
+          const updatedPlayerBoard = placeShip(shipSelected, rowIndex, columnIndex, playerDirection, playerBoard)
+          const updatedShips = playerShips.filter((ship) => ship !== shipSelected);
+          setPlayerBoard(updatedPlayerBoard)
+          setPlayerShips(updatedShips)
+          setShipSelected(null)
         } else {
           console.log("No se puede colocar en esa posicion");
       }
     }
   }
 
-  const hasEnoughtSpace = (rowIndex, columnIndex) => {
-    const shipLength = shipSelected.shipLength
-    if (playerDirection) {
+  const attackClick = ( rowIndex, columnIndex, hasShip) => {
+  }
+
+  const hasEnoughSpace = (ship, rowIndex, columnIndex, direction, board) => {
+    const shipLength = ship.shipLength
+    if (direction) {
       if (columnIndex + shipLength > 10) {
         return false;
       }
       for (let i = columnIndex; i < columnIndex + shipLength; i++) {
-        if (playerBoard[rowIndex][i] === 1) {
+        if (board[rowIndex][i] === 1) {
           return false;
         }
       }
@@ -55,7 +89,7 @@ export const GameProvider = ({ children }) => {
         return false;
       }
       for (let i = rowIndex; i < rowIndex + shipLength; i++) {
-        if (playerBoard[i][columnIndex] === 1) {
+        if (board[i][columnIndex] === 1) {
           return false;
         }
       }
@@ -63,22 +97,18 @@ export const GameProvider = ({ children }) => {
     return true;
   }
 
-  const placeShip = (rowIndex, columnIndex) => {
-    const shipLength = shipSelected.shipLength;
-  
-    if (playerDirection) {
+  const placeShip = (ship, rowIndex, columnIndex, direction, board) => {
+    const shipLength = ship.shipLength;
+    if (direction) {
       for (let i = columnIndex; i < columnIndex + shipLength; i++) {
-        playerBoard[rowIndex][i] = 1;
+        board[rowIndex][i] = 1;
       }
     } else {
       for (let i = rowIndex; i < rowIndex + shipLength; i++) {
-        playerBoard[i][columnIndex] = 1;
+        board[i][columnIndex] = 1;
       }
     }
-    const updatedShips = playerShips.filter((ship) => ship !== shipSelected);
-    setPlayerShips(updatedShips);
-    setShipSelected(null);
-    setPlayerBoard([...playerBoard]);
+    return [...board]
   };
 
   return (
@@ -88,12 +118,14 @@ export const GameProvider = ({ children }) => {
       playerDirection,
       shipSelected,
       playerBoard,
+      computerBoard,
       setPlayerShips,
       handleGameStart,
       setShipSelected,
       selectDirection,
       selectShip,
-      boardClick
+      placeClick,
+      attackClick
     }}
     >
       {children}

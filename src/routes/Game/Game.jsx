@@ -7,15 +7,15 @@ import StartButton from "../../components/Buttons/start/StartButton"
 import { GameContext } from "../../context/GameContext"
 
 const Game = () => {
-  const { startGame } = useContext(GameContext)
+  const { startGame, playerBoard, computerBoard, playerShips} = useContext(GameContext)
 
   return (
     <div id="game">
       {startGame ? <RestartButton/> : null}
-      <StartButton />
+      {playerShips.length === 0 ? <StartButton /> : null}
       <div className="content">
-      <GameBoard title={"Tu Tablero"}/>
-      {startGame ? <GameBoard title={"Computadora"}/> : <Inventory />}
+      <GameBoard title={"Tu Tablero"} board={playerBoard} />
+      {startGame ? <GameBoard title={"Computadora"} board={computerBoard} computer/> : <Inventory />}
       </div>
     </div>
   )

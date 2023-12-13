@@ -1,13 +1,10 @@
 import BoardSquare from "./square/BoardSquare"
 import './GameBoard.css'
-import { useContext } from "react"
-import { GameContext } from "../../context/GameContext"
 
-const GameBoard = ({ title }) => {
-  const { playerBoard } = useContext(GameContext);
+const GameBoard = ({ title, board, computer}) => {
 
   const renderBoard = () => {
-    return playerBoard.map((row, rowIndex) => {
+    return board.map((row, rowIndex) => {
       return row.map((cell, columnIndex) => {
         return (
           <BoardSquare
@@ -16,6 +13,7 @@ const GameBoard = ({ title }) => {
             columnIndex={columnIndex}
             hasShip={cell === 1}
             striked={cell === 2}
+            computer={computer}
           />
         );
       });
