@@ -12,8 +12,16 @@
   cursor: pointer;
 }
 
+.square.attacking{
+  background-color: var(--color2);
+}
+
 .square.ship {
   background-color: var(--ship);
+}
+
+.square.ship.attacking {
+  background-color: var(--color2)
 }
 
 .square.strike{

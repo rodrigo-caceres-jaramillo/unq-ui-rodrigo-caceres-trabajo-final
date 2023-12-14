@@ -16,7 +16,7 @@ const Game = () => {
       <div className="content">
         {startGame ? <Ships ships={playerPlacedShips} text={"Aliados"} /> : null}
         <GameBoard title={"Tu Tablero"} board={playerBoard} own={true}/>
-        {startGame ? <GameBoard title={"Computadora"} board={computerBoard} own={false}/> : <Inventory />}
+        {startGame ? <GameBoard title={"Computadora"} board={computerBoard} own={false} /> : <Inventory />}
         {startGame ? <Ships ships={computerPlacedShips} text={"Enemigos"} /> : null}
       </div>
       <GameCounter />

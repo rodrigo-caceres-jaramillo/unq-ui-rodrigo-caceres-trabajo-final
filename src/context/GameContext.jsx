@@ -32,7 +32,7 @@ export const GameProvider = ({ children }) => {
         setWinner("Jugador")
         setPlayerWins((prev) => prev + 1)
         setGameOver(true)
-      } else if(computerPlacedShips.length === 0){
+      } else if(playerPlacedShips.length === 0){
         setWinner("Computadora")
         setComputerWins((prev) => prev + 1)
         setGameOver(true)
@@ -47,10 +47,14 @@ export const GameProvider = ({ children }) => {
 
   const handleRestartStart = () => {
     setStartGame(false)
+    setGameOver(false)
+    setWinner()
     setPlayerBoard(generateInitialBoard)
     setComputerBoard(generateInitialBoard)
     setPlayerShips([...SHIPS])
     setComputerShips([...SHIPS])
+    setPlayerPlacedShips()
+    setComputerPlacedShips()
     setShipSelected()
   }
 

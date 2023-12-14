@@ -6,12 +6,12 @@ import StartButton from "./buttons/startButton/StartButton"
 import RestartButton from "./buttons/restartButton/RestartButton"
 
 const GameHeader = () => {
-  const { startGame, playerShips } = useContext(GameContext)
+  const { startGame, playerShips} = useContext(GameContext)
   return (
     <div className="game-header">
       {startGame ? <h2>ATACA AL OPONENTE</h2> : <h2>PREPARA TUS BARCOS</h2>}
       <div className="buttons">
-        {playerShips.length === 0 ? <StartButton /> : null}
+        {!startGame && playerShips.length === 0 && <StartButton />}
         <RestartButton/>
       </div>
     </div>
