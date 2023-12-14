@@ -1,15 +1,14 @@
 import { useContext } from "react"
 import { GameContext } from "../../context/GameContext"
+import './GameCounter.css'
 
 const GameCounter = () => {
   const { playerWins, computerWins} = useContext(GameContext)
 
   return (
     <div className="counter">
-      <span>Jugador:</span>
-      <span>{playerWins}</span>
-      <span>Computadora:</span>
-      <span>{computerWins}</span>
+      <div className="block">Jugador: {playerWins} </div>
+      <div className="block">Computadora: {computerWins} </div>
     </div>)
 }
 
