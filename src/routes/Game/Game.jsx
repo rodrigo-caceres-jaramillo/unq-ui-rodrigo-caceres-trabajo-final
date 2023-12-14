@@ -6,12 +6,14 @@ import { GameContext } from "../../context/GameContext"
 import GameHeader from "../../components/GameHeader/GameHeader"
 import Ships from "../../components/Ships/Ships"
 import GameCounter from "../../components/GameCounter/GameCounter"
+import GoBackButton from "../../components/GoBack/GoBackButton"
 
 const Game = () => {
   const { startGame, playerBoard, computerBoard, playerPlacedShips, computerPlacedShips } = useContext(GameContext)
 
   return (
     <div id="game">
+      <GoBackButton />
       <GameHeader />
       <div className="content">
         {startGame ? <Ships ships={playerPlacedShips} text={"Aliados"} /> : null}

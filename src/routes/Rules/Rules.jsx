@@ -1,8 +1,10 @@
+import GoBackButton from '../../components/GoBack/GoBackButton';
 import './Rules.css'
 
 const Rules = () => {
   return (
     <div id="rules">
+      <GoBackButton />
       <h1>COMO JUGAR</h1>
       <div>
         <h3>Comienzo del juego</h3>
