@@ -1,0 +1,22 @@
+#rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color1);
+  padding: 20px;
+  border-radius: 5px;
+  margin: auto;
+  width: 80%;
+}
+
+#rules h1 {
+  font-size: 3em;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+#rules h3 {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 10px;
+}

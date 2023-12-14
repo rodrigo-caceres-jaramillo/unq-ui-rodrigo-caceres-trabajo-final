@@ -172,7 +172,7 @@ export const GameProvider = ({ children }) => {
       if(computer) {
         const updatedShipsPlaced = computerPlacedShips.filter(ship => ship.code !== code);
         setComputerPlacedShips(updatedShipsPlaced);
-        toast.success('Barco Enemigo Hundido', {
+        toast.success(`Barco Enemigo Hundido`, {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -185,7 +185,7 @@ export const GameProvider = ({ children }) => {
       } else {
         const updatedShipsPlaced = playerPlacedShips.filter(ship => ship.code !== code);
         setPlayerPlacedShips(updatedShipsPlaced);
-        toast.warn('barco Aliado Hundido', {
+        toast.warn(`Barco Aliado Hundido`, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,

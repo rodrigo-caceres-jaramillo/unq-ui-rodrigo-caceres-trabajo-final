@@ -1,21 +1,21 @@
 export const SHIPS = [
   {
-    name: "Barco 1",
+    name: "Portaviones ",
     shipLength: 5,
     code: 50
   },
   {
-    name: "Barco 2",
+    name: "Crucero",
     shipLength: 4,
     code: 40
   },
   {
-    name: "Barco 3",
+    name: "Submarino",
     shipLength: 3,
     code: 30
   },
   {
-    name: "Barco 4",
+    name: "Lancha",
     shipLength: 2,
     code: 20
   }
