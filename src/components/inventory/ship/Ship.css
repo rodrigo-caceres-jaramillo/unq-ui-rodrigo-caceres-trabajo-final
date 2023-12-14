@@ -4,7 +4,6 @@
   margin-bottom: 5px;
   padding: 5px;
   text-align: center;
-  cursor: pointer;
 }
 
 .ship.selected-ship {
@@ -12,8 +11,9 @@
   color: var(--color2);
 }
 
-.ship:hover {
+.ship.clickeable:hover {
   background-color: var(--color3);
+  cursor: pointer;
 }
 
 .ship-square {

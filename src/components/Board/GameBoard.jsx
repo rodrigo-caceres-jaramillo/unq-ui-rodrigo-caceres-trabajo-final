@@ -11,9 +11,7 @@ const GameBoard = ({ title, board, own}) => {
             key={`${rowIndex}-${columnIndex}`}
             rowIndex={rowIndex}
             columnIndex={columnIndex}
-            hasShip={cell === 1}
-            striked={cell === 2}
-            water= {cell ===3}
+            code={cell}
             own={own}
           />
         );

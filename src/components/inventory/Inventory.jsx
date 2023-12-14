@@ -14,7 +14,7 @@ const Inventory = () => {
       <button className={playerDirection ? "axis" : "axis selected"} onClick={() => selectDirection(false)}>Vertical</button>
      </div>
       {playerShips.map((ship, index) => (
-        <Ship ship={ship} key={index}/>
+        <Ship ship={ship} key={index} isClickeable={true}/>
       ))}
     </div>
     )

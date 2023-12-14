@@ -29,3 +29,17 @@
   box-sizing: border-box;
   cursor: pointer;
 }
+
+.square.attacking.strike:hover{
+  border: solid 1px black;
+  cursor: default;
+}
+
+.square.attacking.water:hover{
+  border: solid 1px black;
+  cursor: default;
+}
+
+.square.placed {
+  cursor: default;
+}

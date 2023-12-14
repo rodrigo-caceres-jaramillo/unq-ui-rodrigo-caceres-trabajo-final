@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import './Ship.css'
 import { GameContext } from '../../../context/GameContext';
 
-const Ship = ({ship}) => {
+const Ship = ({ship, isClickeable}) => {
   const { selectShip, shipSelected } = useContext(GameContext)
 
   const renderShipLength = () => {
@@ -13,8 +13,19 @@ const Ship = ({ship}) => {
     return squares;
   };
 
+  const hadlerSelect= () => {
+    if (isClickeable){
+      selectShip(ship)
+    } else {
+      return
+    }
+    
+  }
+
   return (
-    <div className={`ship ${ shipSelected && shipSelected.name === ship.name ? 'selected-ship' : ''}`} onClick={() => selectShip(ship)}>
+    <div className={`ship 
+      ${ shipSelected && shipSelected.name === ship.name ? 'selected-ship' : ''}
+      ${ isClickeable  ? 'clickeable' : ''}`} onClick={() => hadlerSelect()}>
         <span className="ship-name">{ship.name}</span>
         <div className="ship-length">
           {renderShipLength()}
