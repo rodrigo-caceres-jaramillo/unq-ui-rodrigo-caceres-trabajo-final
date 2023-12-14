@@ -1,10 +1,15 @@
 import { createContext, useEffect, useState } from "react"
 import { SHIPS } from "./db"
+import { toast } from "react-toastify"
+import WinnerMessage from "../components/WinnerMesssage/WinnerMessage"
 
 export const GameContext = createContext({})
 
 export const GameProvider = ({ children }) => {
+  //Generañ
   const [startGame, setStartGame] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
+  const [winner, setWinner] = useState()
   const generateInitialBoard = () => {
     return Array.from({ length: 10 }, () => Array(10).fill(0));
   }
@@ -14,22 +19,26 @@ export const GameProvider = ({ children }) => {
   const [shipSelected, setShipSelected] = useState()
   const [playerBoard, setPlayerBoard] = useState(generateInitialBoard);
   const [playerPlacedShips, setPlayerPlacedShips] = useState()
+  const [playerWins, setPlayerWins] = useState(0)
   //Computer
   const [computerShips, setComputerShips] = useState([...SHIPS])
   const [computerBoard, setComputerBoard] = useState(generateInitialBoard);
   const [computerPlacedShips, setComputerPlacedShips] = useState()
+  const [computerWins, setComputerWins] = useState(0)
 
   useEffect(() => {
     if (startGame) {
       if(computerPlacedShips.length === 0){
-        console.log("Gana el jugador")
+        setWinner("Jugador")
+        setPlayerWins((prev) => prev + 1)
+        setGameOver(true)
       } else if(computerPlacedShips.length === 0){
-      console.log("Gana la computadora")
+        setWinner("Computadora")
+        setComputerWins((prev) => prev + 1)
+        setGameOver(true)
       }
     }
   }, [computerPlacedShips, playerPlacedShips, startGame])
-
-    
 
   const handleGameStart = () => {
     placeComputerBoar()
@@ -78,7 +87,16 @@ export const GameProvider = ({ children }) => {
       return;
     } else if (shipSelected) {
       if (hasShip) {
-        console.log("Ya hay un barco en esta posicion");
+        toast.error('Ya hay un barco en esa posicion', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       } else if (hasEnoughSpace(shipSelected, rowIndex, columnIndex, playerDirection, playerBoard)) {
         const updatedPlayerBoard = placeShip(shipSelected, rowIndex, columnIndex, playerDirection, playerBoard);
         const updatedShips = playerShips.filter((ship) => ship !== shipSelected);
@@ -87,7 +105,16 @@ export const GameProvider = ({ children }) => {
         setPlayerPlacedShips((prev) => (prev ? [...prev, shipSelected] : [shipSelected])); // Agregar el barco a la lista de barcos colocados por el jugador
         setShipSelected(null);
       } else {
-        console.log("No se puede colocar en esa posicion");
+        toast.error('Posicion Invalida', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
     }
   };
@@ -111,20 +138,20 @@ export const GameProvider = ({ children }) => {
     const shipLength = ship.shipLength
     if (direction) {
       if (columnIndex + shipLength > 10) {
-        return false;
+        return false
       }
       for (let i = columnIndex; i < columnIndex + shipLength; i++) {
         if (board[rowIndex][i] > 9) {
-          return false;
+          return false
         }
       }
     } else {
       if (rowIndex + shipLength > 9) {
-        return false;
+        return false
       }
       for (let i = rowIndex; i < rowIndex + shipLength; i++) {
         if (board[i][columnIndex] > 9) {
-          return false;
+          return false
         }
       }
     }
@@ -138,13 +165,32 @@ export const GameProvider = ({ children }) => {
 
   const updatePlacedShips= (code, board, computer) => {
     if (isShipSunked(code, board)){
-      console.log(`Barco con código ${code} completamente hundido.`)
       if(computer) {
         const updatedShipsPlaced = computerPlacedShips.filter(ship => ship.code !== code);
         setComputerPlacedShips(updatedShipsPlaced);
+        toast.success('Barco Enemigo Hundido', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       } else {
         const updatedShipsPlaced = playerPlacedShips.filter(ship => ship.code !== code);
         setPlayerPlacedShips(updatedShipsPlaced);
+        toast.warn('barco Aliado Hundido', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
     }
   }
@@ -194,6 +240,8 @@ export const GameProvider = ({ children }) => {
       computerBoard,
       playerPlacedShips,
       computerPlacedShips,
+      playerWins,
+      computerWins,
       setPlayerShips,
       handleGameStart,
       setShipSelected,
@@ -204,6 +252,7 @@ export const GameProvider = ({ children }) => {
       handleRestartStart
     }}
     >
+      {gameOver? <WinnerMessage winner={winner} /> : null}
       {children}
     </GameContext.Provider>
   )

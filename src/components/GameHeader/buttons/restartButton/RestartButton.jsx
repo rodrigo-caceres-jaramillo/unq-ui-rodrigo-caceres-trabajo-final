@@ -5,7 +5,7 @@ import { GameContext } from '../../../../context/GameContext'
 const RestartButton = () => {
   const { handleRestartStart} = useContext(GameContext)
 
-  return <button className="header-button" onClick={handleRestartStart}>Reset Game</button>
+  return <button className="header-button" onClick={handleRestartStart}>Reiniciar</button>
 }
 
 export default RestartButton

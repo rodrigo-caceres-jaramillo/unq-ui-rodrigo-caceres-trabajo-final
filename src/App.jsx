@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import { Rules } from './routes/Rules';
 import Game from "./routes/Game/Game";
 import Index from "./routes/Index/Index";
+import { ToastContainer } from "react-toastify";
+import { GameProvider } from "./context/GameContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,9 +22,7 @@ function App() {
     }
   ]);
 
-  return (
-    <RouterProvider router={router} />
-  )
+  return (<RouterProvider router={router} />)
 }
 
 export default App

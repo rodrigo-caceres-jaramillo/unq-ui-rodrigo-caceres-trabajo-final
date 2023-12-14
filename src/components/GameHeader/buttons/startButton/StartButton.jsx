@@ -6,7 +6,7 @@ import { GameContext } from '../../../../context/GameContext'
 const StartButton = () => {
   const { handleGameStart} = useContext(GameContext)
   
-  return <button className="header-button" onClick={handleGameStart}>Start Game</button>
+  return <button className="header-button" onClick={handleGameStart}>Comenzar</button>
 }
 
 export default StartButton
